@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# This displays "best school" 10 times using until
+
+result=0
+count=10
+
+until [ $result -eq $count ]
+	do
+		echo "Best School"
+		(( result = result + 1 ))
+	done

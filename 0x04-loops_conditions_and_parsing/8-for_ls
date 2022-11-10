@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script to ls a current directory using for
+list="$(ls)"
+
+for result in "$list"
+	do
+		echo $result | cut -d'-' -f 2
+	done

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# This is displaying "best school" 10 times
+
+result=1
+
+while [ $result -le 10 ]
+	do
+		echo "Best School"
+		(( result = result +1 ))
+	done
