@@ -5,25 +5,28 @@ import sys
 from requests import get
 import json
 
-worker_id = sys.argv[1]
-endpoint = 'https://jsonplaceholder.typicode.com/users'
-url = endpoint + '/' + worker_id
 
-response = get(url)
-worker_name = response.json()['username']
+if __name__ == '__main__':
+    worker_id = sys.argv[1]
+    endpoint = 'https://jsonplaceholder.typicode.com/users'
+    url = endpoint + '/' + worker_id
 
-todo_endpoint = 'https://jsonplaceholder.typicode.com/todos'
-todo_response = get(todo_endpoint)
-result = todo_response.json()
+    response = get(url)
+    worker_name = response.json()['username']
 
-worker_id = int(worker_id)
+    todo_endpoint = 'https://jsonplaceholder.typicode.com/todos'
+    todo_response = get(todo_endpoint)
+    result = todo_response.json()
 
-dictionary = {worker_id: []}
-for res in result:
-    dictionary[worker_id].append({
-        'task': res['title'],
-        'completed': res['completed'],
-        'username': worker_name
-    })
-with open('{}.json'.format(worker_id), 'w') as file:
-    json.dump(dictionary, file)
+    worker_id = int(worker_id)
+
+    dictionary = {worker_id: []}
+    for res in result:
+        dictionary[worker_id].append({
+            'task': res.get('title'),
+            'completed': res.get('completed'),
+            'username': worker_name
+        })
+
+    with open('{}.json'.format(worker_id), 'w') as file:
+        json.dump(dictionary, file)

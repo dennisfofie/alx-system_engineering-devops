@@ -4,29 +4,31 @@
 import sys
 from requests import get
 
-worker_id = sys.argv[1]
-endpoint = 'https://jsonplaceholder.typicode.com/users'
-url = endpoint + '/' + worker_id
+if __name__ == '__main__':
+    worker_id = sys.argv[1]
+    endpoint = 'https://jsonplaceholder.typicode.com/users'
+    url = endpoint + '/' + worker_id
 
-response = get(url)
-worker_name = response.json()['name']
+    response = get(url)
+    worker = response.json()['name']
 
-todo_endpoint = 'https://jsonplaceholder.typicode.com/todos'
-todo_response = get(todo_endpoint)
-result = todo_response.json()
+    todo_endpoint = 'https://jsonplaceholder.typicode.com/todos'
+    todo_response = get(todo_endpoint)
+    result = todo_response.json()
 
-task_completed = 0
-total_task = 0
-worker_id = int(worker_id)
+    task = 0
+    total = 0
+    worker_id = int(worker_id)
 
-for res in result:
-    if res['userId'] == worker_id and res['completed'] == True:
-        task_completed += 1
-    if res['userId'] == worker_id:
-        total_task += 1
+    for res in result:
+        if res.get('userId') == worker_id and res.get('completed') is True:
+            task += 1
+        if res.get('userId') == worker_id:
+            total += 1
 
-print('Employee {} is done with tasks({}/{}):'.format(worker_name, task_completed, total_task))
+    print(f'Employee {worker} is done with tasks({task}/{total}):')
 
-for title in result:
-    if title['userId'] == worker_id and title['completed'] == True:
-        print('\t {}'.format(title['title']))
+    for title in result:
+        if title.get('userId') == worker_id and title.get('completed') is True:
+            print('{}'.format(title.get('title')))
+# done
