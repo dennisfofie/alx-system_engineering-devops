@@ -1,13 +1,14 @@
 #!/usr/bin/python3
-""" reading from api """
-import sys
-from requests import get
+"""Accessing a REST API for todo lists of employees"""
+
 import json
+import requests
+import sys
 
 if __name__ == '__main__':
     url = "https://jsonplaceholder.typicode.com/users"
 
-    response = get(url)
+    response = requests.get(url)
     users = response.json()
 
     dictionary = {}
@@ -16,7 +17,7 @@ if __name__ == '__main__':
         username = user.get('username')
         url = 'https://jsonplaceholder.typicode.com/users/{}'.format(user_id)
         url = url + '/todos/'
-        response = get(url)
+        response = requests.get(url)
         tasks = response.json()
         dictionary[user_id] = []
         for task in tasks:

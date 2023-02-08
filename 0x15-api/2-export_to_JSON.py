@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-""" making api call to jsonplaceholder to retrieve information """
+"""Accessing a REST API for todo lists of employees"""
 
-import sys
-from requests import get
 import json
+import requests
+import sys
 
 
 if __name__ == '__main__':
@@ -11,11 +11,11 @@ if __name__ == '__main__':
     endpoint = 'https://jsonplaceholder.typicode.com/users'
     url = endpoint + '/' + worker_id
 
-    response = get(url)
+    response = requests.get(url)
     worker_name = response.json()['username']
 
     todo_endpoint = 'https://jsonplaceholder.typicode.com/todos'
-    todo_response = get(todo_endpoint)
+    todo_response = requests.get(todo_endpoint)
     result = todo_response.json()
 
     worker_id = int(worker_id)
