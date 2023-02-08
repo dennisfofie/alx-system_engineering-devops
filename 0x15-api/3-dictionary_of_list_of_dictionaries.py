@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+""" reading from api """
 import sys
 from requests import get
 import json
@@ -24,4 +26,4 @@ if __name__ == '__main__':
                 "username": username
             })
     with open('todo_all_employees.json', 'w') as file:
-        json.dump(dictionary, file)
+        json.dump(dictionary, file)      

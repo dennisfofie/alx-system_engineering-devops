@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# making api call to jsonplaceholder to retrieve information
+""" making api call to jsonplaceholder to retrieve information """
 
 import sys
 from requests import get
