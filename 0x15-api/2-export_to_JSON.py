@@ -7,26 +7,23 @@ import sys
 
 
 if __name__ == '__main__':
-    worker_id = sys.argv[1]
-    endpoint = 'https://jsonplaceholder.typicode.com/users'
-    url = endpoint + '/' + worker_id
+    employeeId = sys.argv[1]
+    baseUrl = "https://jsonplaceholder.typicode.com/users"
+    url = baseUrl + "/" + employeeId
 
     response = requests.get(url)
-    worker_name = response.json()['username']
+    username = response.json().get('username')
 
-    todo_endpoint = 'https://jsonplaceholder.typicode.com/todos'
-    todo_response = requests.get(todo_endpoint)
-    result = todo_response.json()
+    todoUrl = url + "/todos"
+    response = requests.get(todoUrl)
+    tasks = response.json()
 
-    worker_id = int(worker_id)
-
-    dictionary = {worker_id: []}
-    for res in result:
-        dictionary[worker_id].append({
-            'task': res.get('title'),
-            'completed': res.get('completed'),
-            'username': worker_name
+    dictionary = {employeeId: []}
+    for task in tasks:
+        dictionary[employeeId].append({
+            "task": task.get('title'),
+            "completed": task.get('completed'),
+            "username": username
         })
-
-    with open('{}.json'.format(worker_id), 'w') as file:
-        json.dump(dictionary, file)
+    with open('{}.json'.format(employeeId), 'w') as filename:
+        json.dump(dictionary, filename)
