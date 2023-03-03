@@ -9,6 +9,9 @@ def top_ten(subreddit):
     """
     top ten title of hot reddit
     """
+    if subreddit is None or not isinstance(subreddit, str):
+        return 0
+    
     user_agent = {'User-agent': 'Google Chrome Version 109.0.5414.119'}
     url = f'https://www.reddit.com/r/{subreddit}/hot/.json'
     response = requests.get(url, headers=user_agent)
